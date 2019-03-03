@@ -601,6 +601,8 @@ const mouseMove = event => {
     const stroke = strokes[0];
     stroke.push(makePoint(event.offsetX, event.offsetY));
     needsRendering = true;
+    toggleCommentsForm(commentsOff);
+    commentsOff.checked = true;
   }
 };
 
