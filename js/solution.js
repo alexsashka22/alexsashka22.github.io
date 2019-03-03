@@ -593,6 +593,7 @@ const mouseDown = event => {
     stroke.push(makePoint(event.offsetX, event.offsetY));
     strokes.push(stroke);
     needsRendering = true;
+    toggleCommentsForm(commentsOff);
   }
 };
 
@@ -601,8 +602,8 @@ const mouseMove = event => {
     const stroke = strokes[0];
     stroke.push(makePoint(event.offsetX, event.offsetY));
     needsRendering = true;
-    toggleCommentsForm(commentsOff);
-    commentsOff.checked = true;
+    // toggleCommentsForm(commentsOff);
+    // commentsOff.checked = true;
   }
 };
 
@@ -611,6 +612,7 @@ const mouseUp = event => {
     isDrawing = false;
     strokes = [];
     setTimeout(sendMask, 1000);
+    toggleCommentsForm(commentsOn);
   }
 };
 
