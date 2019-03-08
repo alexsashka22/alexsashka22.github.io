@@ -1,36 +1,36 @@
 'use strict';
-const [app] = document.getElementsByClassName('app');
-const [menu] = app.getElementsByClassName('menu');
-const [burgerBtn] = menu.getElementsByClassName('burger');
-const [newImgBtn] = menu.getElementsByClassName('new');
-const [commentsBtn] = menu.getElementsByClassName('comments');
-const [commentsTools] = menu.getElementsByClassName('comments-tools');
-const commentsOn = document.getElementById('comments-on');
-const commentsOff = document.getElementById('comments-off');
-const [drawBtn] = menu.getElementsByClassName('draw');
-const [drawTools] = menu.getElementsByClassName('draw-tools');
-const [shareBtn] = menu.getElementsByClassName('share');
-const [shareTools] = menu.getElementsByClassName('share-tools');
-const [urlTextarea] = shareTools.getElementsByClassName('menu__url');
-const [image] = app.getElementsByClassName('current-image');
-const [preloader] = app.getElementsByClassName('image-loader');
-const [errorMsg] = app.getElementsByClassName('error');
-const [errorHeader] = errorMsg.getElementsByClassName('error__header');
-const [errorText] = errorMsg.getElementsByClassName('error__message');
+const [app] = document.getElementsByClassName('app'),
+      [menu] = app.getElementsByClassName('menu'),
+      [burgerBtn] = menu.getElementsByClassName('burger'),
+      [newImgBtn] = menu.getElementsByClassName('new'),
+      [commentsBtn] = menu.getElementsByClassName('comments'),
+      [commentsTools] = menu.getElementsByClassName('comments-tools'),
+      commentsOn = document.getElementById('comments-on'),
+      commentsOff = document.getElementById('comments-off'),
+      [drawBtn] = menu.getElementsByClassName('draw'),
+      [drawTools] = menu.getElementsByClassName('draw-tools'),
+      [shareBtn] = menu.getElementsByClassName('share'),
+      [shareTools] = menu.getElementsByClassName('share-tools'),
+      [urlTextarea] = shareTools.getElementsByClassName('menu__url'),
+      [image] = app.getElementsByClassName('current-image'),
+      [preloader] = app.getElementsByClassName('image-loader'),
+      [errorMsg] = app.getElementsByClassName('error'),
+      [errorHeader] = errorMsg.getElementsByClassName('error__header'),
+      [errorText] = errorMsg.getElementsByClassName('error__message');
 
-const markerBounds = app.getElementsByClassName('comments__marker')[0].getBoundingClientRect();
-const formBounds = app.getElementsByClassName('comments__form')[0].getBoundingClientRect();
-const defaultMenuHeight = menu.offsetHeight;
-const clickPointShifts = {
+const markerBounds = app.getElementsByClassName('comments__marker')[0].getBoundingClientRect(),
+      formBounds = app.getElementsByClassName('comments__form')[0].getBoundingClientRect(),
+      defaultMenuHeight = menu.offsetHeight,
+      clickPointShifts = {
   left: markerBounds.left - formBounds.left + markerBounds.width / 2,
   top: markerBounds.top - formBounds.top + markerBounds.height
 };
 
 const apiURL = '//neto-api.herokuapp.com/pic';
 
-const picture = document.createElement('div');
-const canvas = document.createElement('canvas');
-const ctx = canvas.getContext('2d');
+const picture = document.createElement('div'),
+      canvas = document.createElement('canvas'),
+      ctx = canvas.getContext('2d');
 
 //~~~~~~ Запуск приложения ~~~~~~
 
@@ -364,11 +364,11 @@ const crtNewCommentsForm = (left, top) => {
 };
 
 const parseNewCommentsForm = comment => {
-  const newCommentsForm = crtNewCommentsForm(comment.left, comment.top);
-  const [commentsBody] = newCommentsForm.getElementsByClassName('comments__body');
-  const [loader] = newCommentsForm.getElementsByClassName('loader');
-  const commentDate = getDate(comment.timestamp).replace(',', '');
-  const newComment = crtNewCommentNode(commentDate, comment.message);
+  const newCommentsForm = crtNewCommentsForm(comment.left, comment.top),
+        [commentsBody] = newCommentsForm.getElementsByClassName('comments__body'),
+        [loader] = newCommentsForm.getElementsByClassName('loader'),
+        commentDate = getDate(comment.timestamp).replace(',', ''),
+        newComment = crtNewCommentNode(commentDate, comment.message);
 
   newComment.dataset.timestamp = comment.timestamp;
   picture.appendChild(newCommentsForm);
@@ -377,11 +377,11 @@ const parseNewCommentsForm = comment => {
 };
 
 const appendNewComment = (comment, commentsForm) => {
-  const [commentsBody] = commentsForm.getElementsByClassName('comments__body');
-  const comments = Array.from(commentsBody.getElementsByClassName('comment'));
-  const commentDate = getDate(comment.timestamp).replace(',', '');
-  const newComment = crtNewCommentNode(commentDate, comment.message);
-  const nextComment = comments.find(curComment => Number(curComment.dataset.timestamp) > comment.timestamp);
+  const [commentsBody] = commentsForm.getElementsByClassName('comments__body'),
+        comments = Array.from(commentsBody.getElementsByClassName('comment')),
+        commentDate = getDate(comment.timestamp).replace(',', ''),
+        newComment = crtNewCommentNode(commentDate, comment.message),
+        nextComment = comments.find(curComment => Number(curComment.dataset.timestamp) > comment.timestamp);
 
   newComment.dataset.timestamp = comment.timestamp;
   commentsBody.insertBefore(newComment, nextComment ? nextComment : comments[comments.length - 1]);
@@ -512,11 +512,11 @@ const postComment = (message, left, top) => {
 const sendComment = event => {
   if (event.target.classList.contains('comments__submit')) {
     event.preventDefault();
-    const crntCommentsForm = event.target.parentElement.parentElement;
-    const [loader] = crntCommentsForm.getElementsByClassName('loader');
-    const [input] = crntCommentsForm.getElementsByClassName('comments__input');
-    const left = parseInt(crntCommentsForm.style.left);
-    const top = parseInt(crntCommentsForm.style.top);
+    const crntCommentsForm = event.target.parentElement.parentElement,
+          [loader] = crntCommentsForm.getElementsByClassName('loader'),
+          [input] = crntCommentsForm.getElementsByClassName('comments__input'),
+          left = parseInt(crntCommentsForm.style.left),
+          top = parseInt(crntCommentsForm.style.top);
 
     showElement(loader);
     postComment(input.value ? input.value : '\n', left, top);
@@ -602,8 +602,6 @@ const mouseMove = event => {
     const stroke = strokes[0];
     stroke.push(makePoint(event.offsetX, event.offsetY));
     needsRendering = true;
-    // toggleCommentsForm(commentsOff);
-    // commentsOff.checked = true;
   }
 };
 
