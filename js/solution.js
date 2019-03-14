@@ -22,9 +22,9 @@ const markerBounds = app.getElementsByClassName('comments__marker')[0].getBoundi
       formBounds = app.getElementsByClassName('comments__form')[0].getBoundingClientRect(),
       defaultMenuHeight = menu.offsetHeight,
       clickPointShifts = {
-  left: markerBounds.left - formBounds.left + markerBounds.width / 2,
-  top: markerBounds.top - formBounds.top + markerBounds.height
-};
+        left: markerBounds.left - formBounds.left + markerBounds.width / 2,
+        top: markerBounds.top - formBounds.top + markerBounds.height
+      };
 
 const apiURL = '//neto-api.herokuapp.com/pic';
 
